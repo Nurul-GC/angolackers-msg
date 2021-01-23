@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Link for icon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo/favicon_io/favicon.ico') }}" type="image/x-icon">
+
+    <!--
+Exemplo: 
+para add algum ficheiro externo
+que faça parte do pacote do projecto
+basta escrever as tags do seguinte jeito..
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/01.css') }}">
+<script src="{{ url_for('static', filename='js/01.js') }}"></script>
+
+Mas para o servidor flask é preferivel usar paginas dinâmicas
+quer dizer adicionar as orientações CSS e código JS dentro da própria página html
+evitando um possivel (404 ou 302) em relação aos links..
+    -->
+    
+    <style>
+        body{
+            background-color: rgba(255, 255, 0, 0.74);
+        }
+        #header h1{
+            text-align: center;
+        }
+        #header a{
+            text-decoration: none;
+            color: red;
+        }
+        #header p{
+            text-align: center;
+            font-size: medium;
+            color: rgb(250, 83, 83);
+        }
+        /* Dropdown Button */
+        .dropbtn {
+            background-color: #000000;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+        }
+        /* The container <div> - needed to position the dropdown content */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        /* Dropdown Content (Hidden by Default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        /* Links inside the dropdown */
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        /* Change color of dropdown links on hover */
+        .dropdown-content a:hover {background-color: #ddd;}
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {display: block;}
+        /* Change the background color of the dropdown button when the dropdown content is shown */
+        .dropdown:hover .dropbtn {background-color: #3e8e41;}
+    </style>
+
+    <!-- Add extra tags to head -->
+    {%block head%} {%endblock head%}
+</head>
+<body>
+    <div id="header">
+        <h1><a href="#">Angolackers Academy</a></h1>
+        <p>Academia de Génios e Aladins</p>
+        
+        <div class="dropdown">
+            <button class="dropbtn">Menu</button>
+            <div class="dropdown-content">
+              <a href="/index">Pagina Inicial</a>
+              <a href="/login">Inicio Sessão</a>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="container">
+        {% block content %} {% endblock content %}
+    </div>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{{ url_for('static', filename='js/jquery-3.5.1.js') }}" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/popper.js') }}" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.js') }}" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
